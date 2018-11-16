@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo"></div>
+<script>
+    var x = document.getElementById("demo");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+    }
+    getLocation();
+</script>
+
+<script>
+    var arr=[12,43,2,24,21,123,1];
+    // arr.sort(function (a,b) {
+    //     return a-b;
+    // });
+    //arr.sort((a,b)=>a-b);
+
+    var current={lat:37.570387, lng:126.985097};
+    var arr=[
+
+        {title:'동',lat:37.570286,lng:126.986884},
+        {title:'남',lat:37.568703,lng:126.984797},
+        {title:'서',lat:37.570199,lng:126.977038},
+        {title:'북',lat:37.575404,lng:126.983790},];
+    console.log(arr);
+    function calcDistance(p1,p2){
+       return Math.sqrt(Math.pow(p1.lat-p2.lat,2)
+            +Math.pow(p1.lng-p2.lng,2)
+        );
+    }
+    arr.sort(function (a,b) {
+        var d1=calcDistance(current,a)*100000;
+        var d2=calcDistance(current,b)*100000;
+       return d1-d2;
+    });
+    console.log(arr);
+
+</script>
+</body>
+</html>

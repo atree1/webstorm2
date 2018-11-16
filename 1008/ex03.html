@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .container{
+        display: flex;
+        width: 100%;
+        height:90vh;
+    }
+    .menu{
+        transition-duration:0.6s;
+        width: 30%;
+        background-color: skyblue;
+        transition-timing-function:ease-in-out ;
+    }
+    .main{
+        width: 100%;
+        background-color: khaki;
+    }
+    .hide{
+        width:0px;
+    }
+</style>
+<div>
+    <button id="btn">MENU</button>
+</div>
+<div class="container">
+    <div class="menu hide">
+
+
+    </div>
+    <!--end menu-->
+    <div class="main">
+
+
+    </div>
+    <!--end main-->
+</div>
+<script>
+    var menu=document.querySelector(".menu");
+
+    document.querySelector("#btn").addEventListener("click",()=>{
+        console.log("clicked.........");
+        var className=menu.getAttribute("class");
+        if(className.indexOf("hide")>=0){
+            menu.setAttribute("class",'menu');
+        }
+        else{
+            menu.setAttribute("class",'menu hide');
+        }
+    },false);
+
+</script>
+</body>
+</html>

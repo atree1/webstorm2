@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onkeyup="enterKey()">
+<h1> web socket chatting</h1>
+<div>
+
+    <input type="text" id="inputText">
+</div>
+
+<div>
+
+    <ul id="msgList">
+
+    </ul>
+
+
+</div>
+<style>
+    #msgList{
+        height:400px;
+        width:50%;
+        min-width:400px;
+        overflow:auto;
+        background: khaki;
+    }
+</style>
+
+<script>
+    var nickName=window.prompt("닉네임 입력하세요");
+    connectServer();
+    var ws;
+    var inputObj=document.querySelector("#inputText");
+    function enterKey() {
+        if(window.event.keyCode==13){
+
+            var msg= nickName+": "+inputObj.value;
+            console.log("enter..............."+inputObj.value);
+            inputObj.value="";
+            ws.send(msg);
+        }
+
+    }
+    function sendName() {
+        ws.send("가악.... 가악....");
+    }
+    var msgList=document.querySelector("#msgList");
+    function  connectServer() {
+        if(!ws){
+            ws=new WebSocket("ws://10.10.10.94:8080/chat");
+            console.log(ws);
+            ws.onmessage=function (evnet) {
+                console.log("FROM SERVER:"+evnet.data);
+                msgList.innerHTML+="<li>"+evnet.data+"</li>";
+            };
+        }
+    }/*
+    function sendMsg(inputTag) {
+      var text=inputTag.value;
+      console.log(text);
+      ws.send(text);
+    }
+    function  disConnectServer() {
+        if(ws){
+            ws.close();
+        }
+    }*/
+</script>
+
+</body>
+</html>

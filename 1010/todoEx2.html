@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <input type="text" id="input">
+    <button id="btn">ADD</button>
+</div>
+<div>
+    <ul class="todoUL"></ul>
+</div>
+
+<script src="todoEx.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var input=$("#input");
+        var btn=$("#btn");
+        var todoUL=$(".todoUL");
+        var currentPk;
+        function refresh(){
+            todosList.getAll(function (arr) {
+                var str="";
+
+                $(arr).each(function (idx,todo) {
+                    str+="<li data-pk='"+todo.pk+"'>"+todo.title+" <button>x</button></li>";
+                });
+                todoUL.html(str);
+            });
+        }
+        refresh();
+        btn.on("click",function (e) {
+            var text=input.val();
+            var label=e.target.innerHTML;
+            if(label==='ADD'){
+            if(text.length==0){
+                return;
+            }
+
+            todosList.add(text,function (pk) {
+                alert(pk+"번 글이 등록됐습니다.");
+                refresh();
+                input.val("");
+
+            });
+                return;
+            }
+            else if(label==='MOD'){
+                var text=input.val();
+                var obj={pk:currentPk,title:text};
+                todosList.modify(obj,function (result) {
+                    console.log(result);
+                   alert("글이 수정 되었습니다.");
+                    refresh();
+                    input.val('');
+                   btn.html("ADD");
+                });
+            }
+
+
+        });
+
+        todoUL.on("click","li button",function (e) {
+            e.stopPropagation();
+            var liObj=$(this).closest('li');
+            var pkValue=liObj.attr("data-pk");
+            console.log("delete click...............");
+            todosList.remove(pkValue,function (result) {
+
+                alert("삭제되었습니다.");
+                liObj.remove();
+            });
+
+        });
+
+        todoUL.on("click","li",function (e) {
+            var liObj=$(this);
+            currentPk=liObj.attr('data-pk');
+            var title=e.target.childNodes[0].nodeValue;
+            input.val(title);
+            btn.html('MOD');
+        })
+    })
+</script>
+
+</body>
+
+</html>

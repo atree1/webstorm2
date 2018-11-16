@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<meta charset="UTF-8">
+
+
+    <div class="wrapper">
+        <h1>TODO</h1>
+        <input id="inputt" type="text" onkeydown="JavaScript:Enter_Check();"/>
+        <ul id="listUL">
+        </ul>
+    </div>
+
+<style>
+
+
+    .on {
+        text-decoration: line-through;
+    }
+</style>
+<script>
+    var idx = 0;
+    var list = [];
+
+    function Enter_Check() {
+        // 엔터키의 코드는 13입니다.
+        if (event.keyCode == 13) {
+            nameTest();  // 실행할 이벤트
+
+        }
+    }
+
+
+    function nameTest() {
+        var value = document.querySelector("#inputt").value;
+        var listUL = document.querySelector("#listUL");
+
+        var lid = 'li' + idx;
+        var iid = 'in' + idx;
+        var sid = 'sp' + idx;
+        var str = '';
+        str += "<li class=" + lid + " data-idx=\"+idx+\" ><input class=" + iid + " data-idx=" + idx + " type=\"checkbox\" /><span class=" + sid + " data-idx=" + idx + ">" + value + "</span></li>";
+        listUL.innerHTML += str;
+        addClick();
+        idx++;
+    }
+
+    function addClick() {
+
+        var liUL = document.querySelector('#listUL');
+        liUL.addEventListener("click", (e) => {
+
+            var input = e.target;
+            var inputIdx = input.getAttribute('data-idx');
+            // console.log(input.getAttribute('class'));
+            if (input.getAttribute('class').startsWith('sp', 0)) {
+
+                remove(inputIdx);
+                return;
+            }
+            addline(input);
+
+
+        }, false);
+
+    }
+
+    function remove(idx) {
+        var li = ".li" + idx;
+
+        var targetPanel = document.querySelector(li);
+        if(targetPanel) {
+            targetPanel.remove();
+        }
+    }
+
+    function addline(input) {
+
+        var inputIdx = input.getAttribute('data-idx');
+        var s2 = "sp" + inputIdx;
+
+        //console.log(input.checked);
+        var targetPanel = document.querySelector("." + s2);
+
+        if (input.checked) {
+            targetPanel.setAttribute("class", s2 + ' on');
+            //      console.log(targetPanel);
+        }
+        else {
+            targetPanel.setAttribute("class", s2);
+            //       console.log(targetPanel);
+        }
+    }
+
+
+</script>
+</body>
+</html>

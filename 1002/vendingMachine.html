@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    *{
+        margin :0px;
+        padding: 0px;
+    }
+
+    .container{
+
+        height: 100vh;
+        width:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .calculator{
+        min-width: 400px;
+        min-height: 600px;
+        background-color: black;
+        box-shadow: 0 10px 6px -6px #777;
+    }
+    .displayPart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .displayPart input{
+        margin: 10px;
+        border: 3px dotted khaki;
+        box-shadow: 0 10px 6px -6px #777;
+        font-size: 2em;
+        width: 70%;
+        border-radius: 15px;
+        text-align: right;
+        padding: 5px;
+    }
+    .buttonPart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .pricePart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .row{
+        display: flex;
+        color: white;
+        margin: auto;
+    }
+    .row div{
+        display: flex;
+        width: 50px;
+        height: 50px;
+        background-color: gray;
+        margin: 5px;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+    input{
+        width:30px;
+        margin: 25px;
+        border-radius: 50px;
+    }
+</style>
+<div class="container">
+
+    <div class="calculator">
+        <div class="header">
+            <div class="pricePart" onclick="clickButton(event)">
+                <div class="row">
+                <div> <input type="image" src="samples/100.jpg" value="100"></div>
+                    <div> <input type="image" src="samples/500.jpg" value="500"></div>
+                    <div> <input type="image" src="samples/1000.jpg" value="1000"></div>
+                </div>
+            </div>
+        </div>
+        <div class="displayPart">
+            <input type="text" id="result" readonly value="0" >
+        </div>
+        <div class="buttonPart" onclick="clickButton(event)">
+            <div class="row">
+                <div> <input type="image" src="samples/01.jpg" value="-500"></div>
+                <div> <input type="image" src="samples/02.jpg" value="-800"></div>
+                <div> <input type="image" src="samples/03.jpg" value="-1000"></div>
+
+            </div>
+            <div class="row">
+                <div> <input type="image" src="samples/04.jpg" value="-900"></div>
+                <div> <input type="image" src="samples/05.jpg" value="-1200"></div>
+                <div> <input type="image" src="samples/11.jpg" value="-1500"></div>
+
+            </div>
+
+            <div class="row">
+                <div>C</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var resultObj=document.querySelector("#result");
+
+
+    function clickButton(event) {
+        var value=event.target.value;
+
+        if(value.startsWith('\n')){
+            return;
+        }
+
+        console.log("click...........");
+        console.log(value);
+        function setValue(val) {
+            resultObj.value=val;
+        }
+
+        if(value==='C'){
+            setValue(0);
+            value=parseInt('0');
+
+        }
+
+        var parseResult=parseInt(value);
+
+        resultObj.value = parseInt(resultObj.value)+parseResult;
+
+
+
+    }
+</script>
+</body>
+</html>

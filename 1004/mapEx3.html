@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>지도 생성하기</title>
+
+</head>
+
+<body>
+
+<!-- 지도를 표시할 div 입니다 -->
+<div id="map" style="width:100%;height:50vh;"></div>
+<style>
+    .wrapper {
+        display: flex;
+        width: 100%;
+        height: 50vh;
+        justify-content: center;
+        align-items: center;
+        background-color: khaki;
+    }
+
+    .listUL {
+        list-style: none;
+        color: dimgray;
+        font-size: 2em;
+    }
+
+    .listUL li {
+        border: 1px solid red;
+
+    }
+</style>
+
+<div class="wrapper">
+    <ul class="listUL">
+
+    </ul>
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e653b0eec49df2abfe801a3bd9890cb5"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.570387, 126.985097), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new daum.maps.Map(mapContainer, mapOption);
+
+
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.570387, 126.985097),
+        map: map
+    });
+
+</script>
+<script>
+    var arr = [
+        {title: '고기팩토리', lat: 37.569820, lng: 126.986001},
+        {title: '갓덴스시', lat: 37.569081, lng: 126.985591},
+        {title: '코다차야', lat: 37.569949, lng: 126.985049},
+        {title: '롯데리아', lat: 37.569857, lng: 126.984923},
+        {title: '초밥의신부타', lat: 37.569440, lng: 126.987367},
+        {title: '청진식당', lat: 37.570515, lng: 126.985710}
+
+    ];
+    var targetUL = document.querySelector(".listUL");
+    var idx=0;
+    var str = '';
+    var arr2 = [];
+    for (var store of arr) {
+        var fn = function (s) {
+            return function () {
+                console.log(s);
+            }
+
+        };
+        arr2.push(fn(store));
+        str += "<li onclick='arr2["+idx+"]()'>" + store.title + "</li>";//이미 루프를 다돈 스토어를 받기때문에 맨 마지막 store 정보가 전달된다.
+        idx++;
+    }
+    targetUL.innerHTML = str;
+
+</script>
+</body>
+</html>

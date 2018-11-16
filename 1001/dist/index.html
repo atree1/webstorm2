@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+<script>
+
+
+</script>
+
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+<input type="text" id="cal" readonly />
+<table>
+  <tr>
+    <td>
+      <button onclick="add(1)">1</button>
+      <button onclick="add(2)">2</button>
+      <button onclick="add(3)">3</button>
+      <button onclick="plus()">+</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button onclick="add(4)">4</button>
+      <button onclick="add(5)">5</button>
+      <button onclick="add(6)">6</button>
+      <button onclick="minus()">-</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button onclick="add(7)">7</button>
+      <button onclick="add(8)">8</button>
+      <button onclick="add(9)">9</button>
+      <button onclick="multy()">*</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button onclick="equl()">=</button>
+      <button onclick="add(0)">0</button>
+      <button onclick="cancel()">c</button>
+      <button onclick="divide()">/</button>
+    </td>
+  </tr>
+<script>
+  var result=0;
+  var num1;
+  var oper;
+
+    function add(num) {
+      var tag=document.querySelector("input");
+      tag.value=tag.value+num;
+      console.log("add click..............."+num);
+      console.dir(tag);
+
+    }
+    function plus() {
+
+     num1=cal.value;
+     oper= '+';
+      cal.value="";
+
+    }
+    function minus() {
+      num1=cal.value;
+      oper= '-';
+      cal.value="";
+    }
+    function equl() {
+      if(oper=='+') {
+    result=parseInt(num1)+parseInt(cal.value);
+      console.log(result);
+
+      }
+      if(oper=='-') {
+        result=parseInt(num1)-parseInt(cal.value);
+        console.log(result);
+
+      }
+      if(oper=='*') {
+        result=parseInt(num1)*parseInt(cal.value);
+        console.log(result);
+
+      }
+      if(oper=='/') {
+        result=parseInt(num1)/parseInt(cal.value);
+        console.log(result);
+
+      }
+      cal.value=result;
+    }
+    function multy(num) {
+      num1=cal.value;
+      oper= '*';
+      cal.value="";
+    }
+    function divide(num) {
+      num1=cal.value;
+      oper= '/';
+      cal.value="";
+    }
+    function cancel() {
+      cal.value="";
+      num1 ="";
+      oper="";
+      result=0;
+
+    }
+
+
+</script>
+</table>
+<!-- Add your site or application content here -->
+<p>Hello world! This is HTML5 Boilerplate.</p>
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>

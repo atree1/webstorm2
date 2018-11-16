@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .wrapper{
+
+    }
+    .dropzone{
+        width:600px;
+        height:600px;
+        background-color:skyblue;
+    }
+    .dropzone img{
+          width:100px;
+          height: 100px;
+      }
+    .result{
+        width:100%;
+        height: 300px;
+        background-color: lightskyblue;
+    }
+    .result img{
+        width:100px;
+        height: 100px;
+    }
+</style>
+<div class="wrapper">
+
+    <div class="dropzone">
+
+        <img class="item" data-pid="P1" src="aaa.jpg">
+        <img class="item" data-pid="P2" src="bbb.jpg">
+        <img class="item" data-pid="P3" src="ccc.jpg">
+
+    </div>
+
+    <div class="result">
+        <canvas id="myCanvas" ></canvas>
+
+    </div>
+
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+            $(".item").draggable({revert:"invalid"});
+            $(".result").droppable({
+                drop:function (event,ui) {
+
+                    var pid=$(ui.draggable[0]).attr("data-pid");
+                ui.draggable.draggable('option','revert',true);
+                    $('.item').data('hover',1);
+                    console.log(pid);
+                }
+            })
+    });
+
+</script>
+</body>
+</html>

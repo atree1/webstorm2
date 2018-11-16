@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<style>
+    .spinner{
+        position: absolute;
+        display: none;
+    }
+</style>
+<form clas="form" action="http://www.naver.com">
+    <img class="spinner" src="marvel_loader.gif">
+    <div>
+    <input type="text" name="uid" value="AAA">
+        <span class="msg"></span>
+        <button id="checkBtn">중복췤</button>
+    </div>
+    <div>
+        <input type="password" name="upw">
+    </div>
+    <div>
+        <input type="text" name="email">
+    </div>
+    <div>
+        <button>btn</button>
+    </div>
+
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            console.log("button clicked..")
+            var obj={};
+            obj.uid=$("input[name='uid']").val();
+            obj.upw=$("input[name='upw']").val();
+            obj.email=$("input[name='email']").val();
+
+            $.post("http://localhost:8080/jsonEx/join",obj,function (text) {
+                alert(text);
+
+            })
+        });
+        $("#checkBtn").on("click",(e)=>{
+            e.preventDefault();     // event의 기본동작 막음
+            e.stopPropagation();   //위 태그로 전파 막음
+            console.log("click.....");
+                $(".spinner").show("slow");
+            var input=$("input[name='uid']");
+            //input.val("ccccccccccc")//파라미터가 있으면 setter .html도 파라미터유무로 get/set 구분
+            //console.log(input.val());// 파라미터가 없으면 getter
+            var userInput=input.val();
+
+            $.ajax({
+                url:"http://localhost:8080/jsonEx/idCheck",
+                data:{str:userInput,pw:"1234"},
+                success :function (result) {
+                    console.log(userInput);
+                    console.log(result);
+                    if(result==='Yes'){
+                        $('.msg').html("해당 아이디는 사용가능");
+                    }else{
+                        alert("사용불가 .. 바꾸셈");
+                    }
+                    $(".spinner").hide("slow");
+                    // setTimeout(()=>{
+                    //     $(".spinner").hide("slow");
+                    // },2000);
+                }
+            })
+        });
+    })
+</script>
+</body>
+</html>
